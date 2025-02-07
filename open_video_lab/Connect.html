@@ -1,0 +1,31 @@
+{{ extends "open_video_lab/Base.html" }}
+{{ block title }}
+    Basic Jitsi Test
+{{ endblock }}
+
+
+{{ block styles }}
+<style>
+    #jaas-container {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 240px;
+        z-index: 99;
+    }
+
+
+</style>
+
+
+{{ endblock }}
+
+
+{{ block content }}
+    <p>Please ensure that your video and microphone are working in the meeting window at the bottom of the screen, the click on the button to be welcomed by the experimenter.</p>
+
+    <button class="btn btn-primary" id="proceed_button">Proceed to experiment</button>
+
+
+{{ endblock }}

@@ -1,0 +1,67 @@
+{% extends "open_video_lab/Base.html" %}
+{% load otree static %}
+
+{% block styles %}
+<style>
+#meet {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 300px;
+    z-index: 99;
+}
+
+#experiment_container { 
+                    width: 100vw; 
+                    height: calc(100vh - 300px); 
+                    overflow-y: auto; 
+                    position: absolute; 
+                    left: 0; 
+                    top: 0;
+                    }
+
+#first_page_content {
+        height: 450px;
+        overflow-y: auto;
+
+    }
+</style>
+
+{% endblock %}
+
+{% block title %}
+{{i18n.CODE_EXCHANGE_TITLE}}
+{% endblock %}
+
+{% block content %}
+
+<p>
+{{i18n.CODE_EXCHANGE_INTRO}}
+</p>
+<p>
+{{i18n.CODE_EXCHANGE_INSTRUCTIONS}}
+</p>
+<br>
+
+
+<div class="alert alert-info" role="alert">
+    <b>{{ player.p_code }}</b> {{i18n.CODE_EXCHANGE_CODE_SUFFIX}}
+    </div>
+<p>
+    
+
+<br>
+<br>
+{{i18n.CODE_EXCHANGE_CODE_PREFIX}} <b> {{ player.p_code }}</b>
+<p>
+{{i18n.CODE_EXCHANGE_NO_CODE}}
+<p>
+
+{% formfield 'code_input_camera_check' label=i18n.CODE_EXCHANGE_FORM_LABEL %}
+
+<br>
+{% next_button %}
+</div>
+
+{% endblock %}

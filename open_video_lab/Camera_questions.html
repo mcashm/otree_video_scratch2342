@@ -1,0 +1,27 @@
+{% extends "open_video_lab/Base.html" %}
+{% load otree static %}
+
+{% block title %}
+    {{i18n.CAMERA_QUESTIONS_TITLE}}
+{% endblock %}
+
+{% block content %}
+{{i18n.CAMERA_QUESTIONS_INTRO}}
+<br><p>
+    {{i18n.CAMERA_QUESTIONS_QUESTION_INTRO}}
+<p>
+
+{{formfield 'camera' label=i18n.CAMERA_QUESTIONS_CAMERA_LABEL}}
+
+{{formfield 'useCamera' label=i18n.CAMERA_QUESTIONS_USECAMERA_LABEL}}
+
+{{formfield 'age' label=i18n.CAMERA_QUESTIONS_AGE_LABEL}}
+<p>
+<div class="alert alert-primary" role="alert">
+<b>{{i18n.CAMERA_QUESTIONS_WARNING}}</b>
+<p>
+</div>
+<p>
+{% next_button %}
+
+{% endblock %}

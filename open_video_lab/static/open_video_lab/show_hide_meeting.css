@@ -1,0 +1,6 @@
+.blurred {
+
+    /* TODO: CHECK SUPPORT ACROSS DEVICES AND BROWSERS */
+    filter: blur(20px);
+
+}

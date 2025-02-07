@@ -1,0 +1,7 @@
+CAMERA_QUESTIONS_TITLE = "Camera Consent"
+CAMERA_QUESTIONS_INTRO = "Please take a moment to <b>SET UP YOUR VIDEO CAMERA AND MICROPHONE.</b>"
+CAMERA_QUESTIONS_QUESTION_INTRO = "Before you begin the survey, please answer the following questions:"
+CAMERA_QUESTIONS_WARNING = "IF YOU ARE UNABLE TO DO THE VIDEO CHAT DURING THE TASK YOU WILL NOT EARN ANY BONUS!"
+CAMERA_QUESTIONS_CAMERA_LABEL = "Do you have a working video camera on your computer?"
+CAMERA_QUESTIONS_USECAMERA_LABEL = "Are you willing to use your computer\'s video camera during your participation in this survey?  Please note, the session may be recorded."
+CAMERA_QUESTIONS_AGE_LABEL = "How old are you?"

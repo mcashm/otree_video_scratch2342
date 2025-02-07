@@ -1,0 +1,33 @@
+{{ extends "otree/Page.html" }}
+{{ load otree }}
+
+{{ block global_styles  }}
+
+<link rel="stylesheet" href="{% static 'open_video_lab/VideoLab.css' %}" />
+<link rel="stylesheet" href="{% static 'open_video_lab/show_hide_meeting.css' %}" />
+
+{{ endblock }}
+{{ block global_scripts  }}
+<iframe name="experiment_container" id="experiment_container" src="{% player.participant._url_i_should_be_on() %}" width="100vw" height="calc(100vh -240px)"></iframe>
+{{ if session.config.magic_cookie == "Not Set"}}
+<script src="{% static 'open_video_lab/errors.js' %}"></script>
+<div id="ovl-error" class="d-none"><h3>Could not connect to Video Lab. <br /> Please contact the experimenter by email/via your recruitment platform and quoting "ERR-OVL-SESSION-CONFIG".</h3></div>
+{{ elif player.participant.jwt_token == "errorin8x8config" }} 
+<script src="{% static 'open_video_lab/errors.js' %}"></script>
+<div id="ovl-error" class="d-none"><h3>Could not connect to Video Lab. <br />  Please contact the experimenter by email/via your recruitment platform and quoting "ERR-OVL-ENV-VARS".</h3></div>
+{{ else }}
+<div id="connecting" class="d-none"><div class="h3">Connecting to Video Conference. Please Wait.</div></div>
+<div id="meet" class="d-none"></div>
+<script src='https://8x8.vc/{{session.config.magic_cookie}}/external_api.js'></script>
+<script src="{% static 'open_video_lab/8x8integration.js' %}" data-jwt_token="{{ player.participant.jwt_token }}" data-participant_code="{{player.participant.code}}" data-content_container="#experiment_container" data-room_name="{{player.participant.vars.current_ovl_room_link}}"></script>
+<script src="{% static 'open_video_lab/live_method.js' %}" data-session_code = "{{player.session.code}}" data-participant_code = "{{player.participant.code}}"></script>
+<script src="{% static 'open_video_lab/show_hide_meeting_container.js' %}"></script>
+<script src="{% static 'open_video_lab/show_hide_meeting.js' %}" data-app_name="{{player.participant._current_app_name}}" data-page_name="{{player.participant._current_page_name}}" data-blurred_pages="{{session.config.blurred_pages}}"></script>
+{{ endif }}
+<input type="hidden" disabled id="checks_passed" value="{{player.participant.vars.cam_checked}}"/>
+{% if player.participant.vars.ovl_hand_raised %}
+<button type="button" id="btn-request-exptr" class="btn btn-success d-none">Lower Hand &#9995;</button>
+{% else %}
+<button type="button" id="btn-request-exptr" class="btn btn-dark d-none">Raise Hand &#9995;</button>
+{% endif %}
+{{ endblock }}

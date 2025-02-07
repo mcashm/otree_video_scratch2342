@@ -1,0 +1,32 @@
+CAMERA_CHECK_TITLE = "CAMERA CHECK"
+CAMERA_CHECK_INTRO = """
+There is a Jitsi video chat window below. When it connects you will be automatically put into a private room where 
+you can ensure everything is functioning properly for you. Guidance is available below if you are having problems.
+If you still cannot get your microphone and camera working after following the troubleshooting advice below, please
+use the 'Raise Hand' button, and an experiment will come to assist you when they can.
+
+"""
+CAMERA_CHECK_WARN_NO_VIDEO = "IF YOU ARE UNABLE TO PARTICIPATE IN THE VIDEO CHAT YOU WILL NOT BE ABLE TO PARTICIPATE AND NOT BE ELIGIBLE FOR PAYMENT"
+CAMERA_CHECK_TROUBLESHOOTING_ADVICE_HEADING = "Troubleshooting Advice"
+CAMERA_CHECK_BROWSER_PERMS_HEADING = "Browser Permissions"
+CAMERA_CHECK_BROWSER_PERMS_INTRO = "You have to give specific permission for a website to access your camera and microphone. You can check whether you have done this and edit this from the address bar of your browser."
+CAMERA_CHECK_BROWSER_PERMS_TITLE = "How to give access to your camera and microphone in your browser?"
+CAMERA_CHECK_CHROME_1 = "Upon loading the page for the first time, select <strong>Allow</strong> for camera and microphone permissions"
+CAMERA_CHECK_CHROME_2 = "If your camera and microphone still aren't working, first click on the camera and microphone permissions icon to the left of the address bar, then select <strong> Camera and Microphone permissions</strong> (flip the toggles to the right)"
+CAMERA_CHECK_CHROME_3 = "You will have to <strong>reload</strong> the page to get the new settings to take effect. You can also reload the page using (CTRL/CMD + R) or (F5)."
+CAMERA_CHECK_FIREFOX_1 = "When prompted, give Firefox access to your camera and microphone."
+CAMERA_CHECK_FIREFOX_2 = "Check \"Remember this decision\" and click \"<strong>Allow</strong>\","
+CAMERA_CHECK_FIREFOX_3 = "If your camera and microphone still aren't working, first click the camera and microphone permissions icon to the left of the address bar and then give permissions for both camera and microphone "
+CAMERA_CHECK_FIREFOX_4 = "You will have to <strong>reload</strong> the page to get the new settings to take effect. You can reload the page using (CTRL/CMD + R), (F5), or the reload button. "
+CAMERA_CHECK_SAFARI_1 = "You should see a confirmation box asking you to allow Jitsi to use your camera and microphone. Click \"<strong>Allow</strong>\"." 
+CAMERA_CHECK_SAFARI_2 = " If you don't see the above confirmation box, go to <strong>Preferences &gt; Websites &gt; Camera</strong> and set this to <strong>Allow</strong>, and set <strong>Microphone</strong> to <strong>Allow</strong> as well."
+CAMERA_CHECK_SAFARI_3 = "You will have to <strong>reload</strong> the page to get the new settings to take effect. You can reload the page using (CMD + R), (F5), or the reload button. "
+CAMERA_CHECK_DEVICE_SELECTION_HEADING = "Device Selection" 
+CAMERA_CHECK_DEVICE_SELECTION_BODY = "Is the Jitsi conference set to use the correct devices? Click on the camera and microphone icons at the bottom of the video (Jitsi) frame. Select your microphone and camera here."
+CAMERA_CHECK_DEVICE_SELECTION_TEST = "You can test your microphone by tapping on it or speaking and watching to see if the microphone level indicator goes up."
+CAMERA_CHECK_SHUTTER_HEADING = "Physical Camera Privacy Shutter"
+CAMERA_CHECK_SHUTTER_ADVICE = "Does your camera have a shutter for privacy purposes?  Is it open?"
+CAMERA_CHECK_MUTE_BUTTON_HEADING = "Mute Button"
+CAMERA_CHECK_MUTE_BUTTON_ADVICE = "Does your microphone have a physical mute button? Is it engaged?"
+CAMERA_CHECK_WIRES_HEADING = "Wires"
+CAMERA_CHECK_WIRES_ADVICE = "Please make sure your camera and microphone are plugged in to your computer and work with another program."

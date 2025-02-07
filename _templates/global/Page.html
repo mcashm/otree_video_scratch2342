@@ -1,0 +1,162 @@
+{{ extends "otree/Page.html" }}
+{{ load otree }}
+
+{{ block global_styles  }}
+<style>
+#meet {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 300px;
+    z-index: 99;
+}
+
+#experiment_container { 
+                    width: 100vw; 
+                    height: calc(100vh - 300px); 
+                    overflow-y: auto; 
+                    position: absolute; 
+                    left: 0; 
+                    top: 0;
+                    }
+
+#first_page_content {
+        height: 450px;
+        overflow-y: auto;
+
+    }
+</style>
+
+
+{{ endblock }}
+{{ block global_scripts  }}
+<iframe name="experiment_container" id="experiment_container" class="d-none" src width="100vw" height="calc(100vh -240px)"></iframe>
+<div id="meet" />
+<script src='https://8x8.vc/external_api.js'></script>
+<script type="text/javascript">
+    let api;
+  
+    const initIframeAPI = () => {
+      const domain = '8x8.vc';
+      const options = {
+        roomName: 'vpaas-magic-cookie-c37d205fa1814c59a057f63641e2ed5a/CameraCheck',
+        jwt: "{{ player.participant.jwt_token }}",
+        parentNode: document.querySelector('#meet'),
+        configOverwrite: {
+
+          startWithAudioMuted: true,
+          userInfo: {
+              displayName: 'Participant {{ player.participant.code }}',
+              email: 'no_email',
+            },
+            prejoinConfig: {
+              enabled: true,
+              hideDisplayName: true,
+              hideExtraJoinButtons: ['no-audio', 'by-phone'],
+            },
+            
+            lobby: {
+              autoKnock: true,
+              enableChat: false
+            },
+              
+            securityUi: {
+              hideLobbyButton: true,
+              disableLobbyPassword: true,
+            },
+              
+            disableTileView: false,
+
+            disableAddingBackgroundImages: true,
+
+            readOnlyName: true,
+
+            disableRemoteMute: true,
+
+            disableModeratorIndicator: true,
+
+            remoteVideoMenu: {
+              disabled: true,
+              disableDemote: true,
+              disableKick: true,
+              disableGrantModerator: true,
+              disablePrivateChat: true,
+            },
+
+            redirectURI: 'https://8x8.vc/static/oauth.html',
+
+            disabledSounds: [
+                'RECORDING_OFF_SOUND',
+                'RECORDING_ON_SOUND',
+            ],
+
+            recordingService: {
+              sharingEnabled: false,
+            },
+            /*
+            recordings: {
+                recordAudioAndVideo: true,
+                suggestRecording: false,
+                showPrejoinWarning: false
+            },
+            */
+            breakoutRooms: {
+                hideJoinRoomButton: true,
+            },
+
+            toolbarButtons: [
+              'camera',
+              'closedcaptions',
+              'microphone',
+              'toggle-camera',
+              'chat',
+              'videoquality',
+            ],
+
+            //hideRecordingLabel: true,
+
+            disabledNotifications: [
+              //'notify.moderator',
+              //'dialog.recording',
+              //'notify.localRecordingStarted', // shown when the local recording has been started
+              //'notify.localRecordingStopped',
+              //'recording.linkAvailable',
+              //'recording.linkGenerated',
+              //'recording.inProgress',
+            ],
+        },
+      };
+
+      api = new JitsiMeetExternalAPI(domain, options);
+    }
+  
+   window.onload = () => {
+     if (window.self == window.parent.self) {
+
+          jQuery('.otree-form').attr("target", "experiment_container")
+          jQuery('.otree-btn-next').on('click', function(){ 
+                                    jQuery('#first_page_content').addClass('d-none'); 
+                                    jQuery('#_otree-title').addClass('d-none');
+                                    jQuery('#experiment_container').removeClass('d-none');
+                                    jQuery('.otree-btn-next').closest('.otree-form').addClass('d-none');
+                                    });
+          initIframeAPI();
+          api.executeCommand('displayName', 'Participant {{ player.participant.code }}');    
+     }
+      else
+    {
+        jQuery('#experiment_container').addClass('d-none'); 
+        jQuery('#meet').addClass('d-none'); 
+
+    }
+
+  }
+
+
+
+</script>
+
+
+
+{{ endblock }}

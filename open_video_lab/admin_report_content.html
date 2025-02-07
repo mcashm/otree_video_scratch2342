@@ -1,0 +1,63 @@
+<script src="{% static 'otree/js/reconnecting-websocket-iife.min.js' %}" id="reconnecting-websocket-script"></script>
+{{ if session.config.magic_cookie == "Not Set"}}
+<div class="alert alert-danger">Video Lab Integration not configured.  Session.config.magic_cookie is not set. No Video Lab functionality will work until this is set.</div>
+{{elif main_room_jwt == "errorin8x8config"}}
+<div class="alert alert-danger">Error in Video Lab Integration not configured.  Environment variables not set. No Video Lab functionality will work until this error is resolved.</div>
+{{else }}
+<script src='https://8x8.vc/{{session.config.magic_cookie}}/external_api.js'></script>
+<script src="{% static 'open_video_lab/admin_report.js' %}" 
+	data-magic_cookie = "{{session.config.magic_cookie}}"
+	data-session_ovl_room_link = "{{session_ovl_room_link}}"
+	data-main_room_jwt = "{{main_room_jwt}}"
+	data-private_room_jwt = "{{private_room_jwt}}"
+	data-popup_url = "{% static 'open_video_lab/8x8popup.html' %}"
+    data-session_code = "{{session.code}}"
+ >
+</script>
+<script src="{% static 'open_video_lab/admin_live_method.js' %}" data-session_code = "{{session.code}}" id="admin_live_script"></script>
+
+
+<div>
+<button type="button" class="btn btn-success" id="btnInit">Open New Windows</button>
+
+
+    <div id="private-room-selector-container">
+        <p>Please select a participant to start a private conversation with</p>
+        <select id="private-room-selector" class="form-select">
+                <option data-participant_code="none">Select a Participant</option>
+            {% for p in players %}
+                <option data-private_ovl_room_link="{{p.private_ovl_room_link}}" data-participant_code="{{p.code}}">Player {{p.code}}</option>
+            {% endfor %}
+        </select>
+        <button type="button" class="btn btn-primary" id="manual-breakout-room-btn">Create Breakout Room</button>
+    </div>
+
+
+    <br>
+
+</div>
+{{ endif }}
+
+<div class="new_todo">
+    <div id="to-do-list" class="accordion">
+{% for item in todo_list %}
+                <div class="accordion-item {% if item.todo_type == "raised_hand" %}raised-hand{% endif %}"  data-participant-id="{{item._participant_code}}">
+                    <h2 class="accordion-header" id="todo-{{item.id}}">
+                      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-todo-{{item.id}}" aria-expanded="true" aria-controls="collapase-todo-{{item.id}}">
+                       {{item.title}}
+                      </button>
+                    </h2>
+
+                   <div id="collapse-todo-{{item.id}}" class="accordion-collapse collapse" aria-labelledby="todo-{{item.id}}" data-bs-parent="#to-do-list">
+                       <div class="accordion-body">         
+                            {{item.content|safe}}
+                          <button class="todo-done-button btn btn-success float-end" type="button" data-todo_id={{item.id}} data-participant_code="{{item._participant_code}}">Done</button>
+                       </div>
+                   </div>
+                </div>
+
+{% endfor %}
+    </div>
+</div>
+
+

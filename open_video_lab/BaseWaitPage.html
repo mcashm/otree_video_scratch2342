@@ -1,0 +1,54 @@
+{% extends 'otree/Base.html' %}
+
+
+
+
+{% block global_styles %}
+<link rel="stylesheet" href="{% static 'open_video_lab/VideoLab.css' %}" />
+<link ref="stylesheet" href="{% static 'open_video_lab/VideoLabWaitPage.css' %}" />
+{% endblock %}
+
+{% comment %}this template is used by rooms, where js_vars does not exist{% endcomment %}
+{% block body_main %}
+
+
+<div class="otree-wait-page container">
+    <div class="card">
+        <h4 class="otree-wait-page__title card-header" id="_otree-title">
+            {% block title %}{{ title_text }}{% endblock %}
+        </h4>
+        <div class="card-body">
+            <div id="_otree-server-error" class="alert alert-danger d-none">
+                {{ "An error occurred."|gettext }}
+            </div>
+            {% block content %}
+            <p class="otree-wait-page__body">{{ body_text }}</p>
+            {% endblock %}
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"></div>
+            </div>
+        </div>
+    </div>
+    {% if is_defined('view.is_debug') and view.is_debug %}
+        {% include 'otree/includes/debug_info.html' %}
+    {% endif %}
+</div>
+{% endblock %}
+
+
+{% block global_scripts %}
+    {{ super() }}
+{% if is_defined('js_vars') and js_vars %}
+<script data-js_vars="{{js_vars}}" src="{% static 'open_video_lab/include_js_vars.js' %}"></script>
+{% endif %}
+
+<script src='https://8x8.vc/external_api.js'></script>
+
+<iframe name="experiment_container" id="experiment_container" src="{% player.participant._url_i_should_be_on() %}" width="100vw" height="calc(100vh -240px)"></iframe>
+<div id="meet"></div>
+<script src='https://8x8.vc/external_api.js'></script>
+<script src="{% static 'open_video_lab/8x8integration.js' %}" data-jwt_token="{{ player.participant.jwt_token }}" data-participant_code="{{player.participant.code}}" data-content_container="#experiment_container"></script>
+<!-- this is an HTML file rather than JavaScript static file because context variables need to be passed to it -->
+<script src="{% static 'open_video_lab/VideoLabWaitPage.js' %}" type="text/javascript" data-socket_url="{{ view.socket_url() }}" data-gbat_is_defined={% if is_defined('view.group_by_arrival_time') %}true{% endif %} data-gbat="{{view.group_by_arrival_time }}"></script>
+{% endblock %}
+
